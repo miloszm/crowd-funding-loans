@@ -1,0 +1,53 @@
+Crowd Funding Loans
+=================================
+
+This service manages loans and offers.
+
+This file will be packaged with your application when using `activator dist`.
+
+APPLICATION
+===========
+
+To start the application:
+    $ sbt run
+
+The application will be started on port 9000.
+
+TESTS
+=====
+
+To run the test:
+    $ sbt test
+
+REST APIs
+=========
+
+Create a loan:
+
+Request:
+    $ curl -v -H "Content-Type: application/json" \
+        -X POST -d '{"amount": 100.00, "durationInDays": 5}' http://localhost:9000/loans
+
+Response:
+    $ {"loanId":"61c4c166-de21-40b3-b878-26b78e2e672d"}
+
+Create an offer:
+Request:
+    $ curl -v -H "Content-Type: application/json" \
+        -X POST -d '{"amount": 100.00, "interestRate": 5}' http://localhost:9000/loans/61c4c166-de21-40b3-b878-26b78e2e672d/offers
+
+Response:
+    $ {"offerId":"a5f66ae4-896f-4320-b00d-79eb5d4512d2"}
+
+Get the current offer:
+
+Request:
+    $ curl -v -H "Content-Type: application/json" \
+        -X GET http://localhost:9000/loans/61c4c166-de21-40b3-b878-26b78e2e672d/offers/current
+
+Response:
+    $ {"amount":100,"combinedInterest":5}
+
+Notes
+=====
+Using play application to be able to also handle UI in the same project.
